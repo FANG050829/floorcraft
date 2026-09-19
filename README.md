@@ -75,7 +75,7 @@ FLOORCRAFT 把一间 12 × 8 米的商业空间变成一块可以反复推敲的
 
 ```bash
 # 1 · 克隆并安装依赖（Bun / npm / pnpm 均可）
-git clone https://github.com/<your-name>/floorcraft.git
+git clone https://github.com/FANG050829/floorcraft.git
 cd floorcraft
 bun install
 

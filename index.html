@@ -311,6 +311,25 @@ svg.ic{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;str
 @keyframes load{to{transform:translateX(0)}}
 @media (max-width:1360px){ .field{display:none} }
 @media (max-width:1180px){ #fireBtn span,#costBtn span,#roomBtn span{display:none} .tbtn{padding:7px 8px} }
+
+/* ───── 进入提示 ───── */
+#gate{position:fixed;inset:0;z-index:300;background:rgba(38,35,29,.42);display:flex;align-items:center;justify-content:center;
+  transition:opacity .45s ease,visibility .45s}
+#gate.hide{opacity:0;visibility:hidden}
+.gate-card{width:min(410px,calc(100vw - 48px));background:var(--paper);border:1px solid var(--ink);
+  box-shadow:10px 10px 0 rgba(38,35,29,.22);padding:30px 32px 26px;position:relative}
+.gate-card::before{content:'';position:absolute;inset:6px;border:1px solid var(--line);pointer-events:none}
+.gate-mark{width:26px;height:26px;background:var(--brand);position:relative;margin-bottom:18px}
+.gate-mark::after{content:'';position:absolute;inset:6px;border:1.5px solid var(--paper)}
+.gate-card h2{font-size:16px;letter-spacing:.16em;font-weight:700}
+.gate-sub{font-size:10.5px;letter-spacing:.3em;color:var(--ink2);margin-top:6px}
+.gate-card p{font-size:12.5px;line-height:2;color:var(--ink2);letter-spacing:.03em;margin-top:14px}
+.gate-card p b{color:var(--ink);font-weight:600}
+.gate-foot{display:flex;justify-content:flex-end;margin-top:22px}
+.gate-btn{background:var(--brand);color:#fff;font-weight:600;font-size:12.5px;letter-spacing:.18em;
+  padding:10px 28px;border:1px solid var(--ink);box-shadow:3px 3px 0 rgba(38,35,29,.25);transition:all .15s}
+.gate-btn:hover{filter:brightness(1.08);transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(38,35,29,.25)}
+.gate-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(38,35,29,.25)}
 </style>
 </head>
 <body>
@@ -444,9 +463,25 @@ svg.ic{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;str
 
 <div id="intro"><div class="intro-in"><div class="intro-mark"></div><h1>FLOORCRAFT</h1><p>铺 面 工坊 · 商 业 空 间 规 划</p><div class="intro-line"></div></div></div>
 
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-mark"></div>
+    <h2>使用提示</h2>
+    <div class="gate-sub">DEMO NOTICE</div>
+    <p>当前页面是本项目的<b>纯 HTML 演示版</b>，在功能与细节上与完整项目存在一定差异，最终效果以完整项目为准。点击「确认进入」即可开始体验。</p>
+    <div class="gate-foot"><button class="gate-btn" id="gateOk">确认进入</button></div>
+  </div>
+</div>
+
 <!-- 看门狗 -->
 <script>
 (function(){
+  var gate=document.getElementById('gate'),gateOk=document.getElementById('gateOk');
+  function enterApp(){ if(gate)gate.classList.add('hide'); }
+  if(gateOk)gateOk.addEventListener('click',enterApp);
+  window.addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&gate&&!gate.classList.contains('hide'))enterApp();
+  });
   setTimeout(function(){
     if(!window.__APP_OK){
       var p=document.querySelector('#intro .intro-in p');

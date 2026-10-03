@@ -5,7 +5,7 @@
  * 1. 左侧家具库预览图升级为 3D 实时渲染（共享 WebGL 渲染器）
  * 2. 顶栏「光源」按钮：氛围预设 + 环境光/太阳光/太阳色/阴影滑杆 + 可拖拽点光源/聚光灯
  * 3. 木质材质添加程序化木纹纹理 + 环境贴图增强金属反射
- * 4. 6 种氛围预设（白天/黄昏/夜晚/暖光吧/晨光/冷调）一键营造光线氛围
+ * 4. 9 种氛围预设（白天/晨光/正午/黄昏/日落/夜晚/暖光吧/冷调/黄金时刻）一键营造光线氛围
  *
  * 依赖：THREE, M, BUILDERS, scene, sun, renderer, room, vp, $, clamp,
  *   showToast, BRAND, libThumbs, customThumbs, redrawThumbs, _v3, camera, brandPop, roomPop

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Sora, Noto_Sans_SC } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Sora, Noto_Sans_SC, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
 const sora = Sora({
@@ -13,6 +13,13 @@ const notoSC = Noto_Sans_SC({
   variable: "--font-noto-sc",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "600"],
   display: "swap",
 });
 
@@ -36,6 +43,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#F6F2E9",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${sora.variable} ${notoSC.variable} antialiased`}>
+      <body className={`${sora.variable} ${notoSC.variable} ${plexMono.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -17,41 +17,57 @@ if MARK in src:
 # ─────────────────────────────────────────────────────────
 # CSS additions
 # ─────────────────────────────────────────────────────────
-CSS = '''/*ENH_V2*/
-/* ====== 3D 缩略图 ====== */
-.lib-item .threed-wrap{position:relative;width:44px;height:44px;flex:none;border-radius:3px;overflow:hidden;background:linear-gradient(160deg,#F1EBDD,#E7DFC9)}
+CSS = '''/*ENH_V2*//* ====== 3D 缩略图 ====== */
+.lib-item .threed-wrap{position:relative;width:44px;height:44px;flex:none;border-radius:2px;overflow:hidden;
+  background:linear-gradient(160deg,#F1EBDD,#E7DFC9);border:1px solid var(--line);transition:border-color var(--t-fast)}
+.lib-item:hover .threed-wrap{border-color:var(--ink3)}
 .lib-item .threed-wrap canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
 
-/* ====== 光源面板 ====== */
-#lightPop{position:absolute;top:60px;right:70px;z-index:60;background:rgba(252,250,244,.97);border:1px solid var(--ink);padding:14px;width:268px;display:none;box-shadow:6px 6px 0 rgba(38,35,29,.08)}
-#lightPop.open{display:block;animation:popin .18s ease}
-#lightPop h5{font-size:11px;letter-spacing:.2em;color:var(--ink2);margin-bottom:10px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
-#lightPop h5 button{font-size:10px;letter-spacing:.08em;border:1px solid var(--line);padding:3px 8px;color:var(--ink2)}
+/* ====== 光源面板 —— 与品牌色 / 房间面板同一图框语言 ====== */
+#lightPop{position:absolute;top:60px;right:70px;z-index:60;background:#FCFAF4;
+  border:1px solid var(--ink);padding:16px 16px 14px;width:272px;display:none;box-shadow:var(--sh2)}
+#lightPop::before{content:'';position:absolute;inset:5px;border:1px solid var(--line);pointer-events:none}
+#lightPop.open{display:block;animation:popin .22s var(--spring)}
+#lightPop>*{position:relative;z-index:1}
+#lightPop h5{font-size:10px;letter-spacing:.24em;color:var(--ink2);margin-bottom:12px;font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;font-family:var(--mono)}
+#lightPop h5 button{font-size:9.5px;letter-spacing:.1em;border:1px solid var(--line);padding:3px 9px;color:var(--ink2);
+  font-family:var(--mono);transition:border-color var(--t-fast),color var(--t-fast)}
 #lightPop h5 button:hover{border-color:var(--brand);color:var(--brand)}
-.lrow{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ink2);margin-bottom:9px}
+.lrow{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ink2);margin-bottom:10px}
 .lrow span{width:42px;flex:none;letter-spacing:.06em}
-.lrow input[type=range]{flex:1;accent-color:var(--brand);height:16px}
-.lrow b{width:48px;flex:none;text-align:right;font-size:11px;color:var(--ink)}
+.lrow input[type=range]{flex:1}
+.lrow b{width:48px;flex:none;text-align:right;font-size:11px;color:var(--ink);font-family:var(--mono);font-weight:500}
 .lrow input[type=color]{width:30px;height:22px;border:1px solid var(--line);background:none;padding:0;cursor:pointer;flex:none}
-.lseg{display:flex;border:1px solid var(--line);margin-bottom:9px}
-.lseg button{flex:1;padding:6px 2px;font-size:11px;letter-spacing:.05em;color:var(--ink2)}
+.lseg{display:flex;border:1px solid var(--line2);margin-bottom:11px}
+.lseg button{flex:1;padding:6px 2px;font-size:11px;letter-spacing:.05em;color:var(--ink2);
+  transition:background var(--t-fast),color var(--t-fast)}
+.lseg button:not(.on):hover{background:rgba(38,35,29,.06);color:var(--ink)}
 .lseg button.on{background:var(--ink);color:var(--paper)}
-.lightList{max-height:130px;overflow-y:auto;border:1px solid var(--line);background:rgba(255,255,255,.4);margin-bottom:8px}
+.lightList{max-height:130px;overflow-y:auto;border:1px solid var(--line2);background:rgba(255,255,255,.4);margin-bottom:9px}
 .lightList:empty::before{content:'还没有添加光源 · 下方可新增';display:block;padding:14px;text-align:center;font-size:11px;color:var(--ink2)}
-.litRow{display:flex;align-items:center;gap:7px;padding:6px 8px;cursor:pointer;border-left:2px solid transparent;font-size:11px}
+.litRow{display:flex;align-items:center;gap:7px;padding:6px 8px 6px 12px;cursor:pointer;position:relative;font-size:11px;
+  transition:background var(--t-fast)}
 .litRow:hover{background:rgba(38,35,29,.05)}
-.litRow.on{background:rgba(38,35,29,.07);border-left-color:var(--brand)}
+.litRow.on{background:rgba(38,35,29,.07)}
+.litRow.on::before{content:'';position:absolute;left:3px;top:50%;transform:translateY(-50%);width:5px;height:5px;background:var(--brand)}
 .litRow .swDot{width:12px;height:12px;border:1px solid rgba(0,0,0,.2);flex:none}
 .litRow span{flex:1}
-.litRow button{width:18px;height:18px;padding:2px;border:1px solid transparent;color:var(--ink2)}
+.litRow button{width:18px;height:18px;padding:2px;border:1px solid transparent;color:var(--ink2);transition:border-color var(--t-fast),color var(--t-fast)}
 .litRow button:hover{border-color:var(--warn);color:var(--warn)}
-.laddRow{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:8px}
-.laddRow button{font-size:10.5px;padding:6px 2px;border:1px solid var(--ink);background:rgba(255,255,255,.5);letter-spacing:.03em;transition:.15s}
+.laddRow{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:9px}
+.laddRow button{font-size:10.5px;padding:6px 2px;border:1px solid var(--ink);background:rgba(255,255,255,.5);letter-spacing:.03em;
+  transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast) var(--ease)}
 .laddRow button:hover{background:var(--ink);color:var(--paper)}
+.laddRow button:active{transform:translateY(1px)}
 .lightGizmo{position:absolute;width:14px;height:14px;transform:translate(-50%,-50%);pointer-events:none;z-index:6}
 .lightGizmo .ring{position:absolute;inset:0;border:2px solid currentColor;border-radius:50%;animation:lglow 1.6s ease-in-out infinite}
 .lightGizmo .core{position:absolute;inset:4px;border-radius:50%;background:currentColor}
 @keyframes lglow{0%,100%{box-shadow:0 0 0 0 currentColor;opacity:.85}50%{box-shadow:0 0 8px 2px currentColor;opacity:1}}
+@media (max-width:860px){
+  #lightPop{right:10px;width:min(272px,calc(100vw - 20px))}
+}
+
 /*ENH_V2_END*/
 '''
 # Insert before the LAST </style>
